@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import authRequests from '../../helpers/data/authRequests';
+import authRequests from '../../../helpers/data/authRequests';
 import './Auth.scss';
 
 import googleButton from './images/GoogleImage.png';
@@ -14,7 +14,7 @@ class Auth extends React.Component {
     e.preventDefault();
     authRequests.authenticate()
       .then(() => {
-        this.props.isAuthenticated();
+        this.props.history.push('/home');
       })
       .catch(err => console.error('there is an issue with auth', err));
   }
