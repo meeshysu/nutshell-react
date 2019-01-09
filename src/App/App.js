@@ -56,6 +56,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 class App extends React.Component {
   state = {
     authed: false,
+    pendingUser: true,
   }
 
   componentDidMount() {
@@ -64,10 +65,12 @@ class App extends React.Component {
       if (user) {
         this.setState({
           authed: true,
+          pendingUser: false,
         });
       } else {
         this.setState({
           authed: false,
+          pendingUser: false,
         });
       }
     });
@@ -78,11 +81,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed } = this.state;
+    const { authed, pendingUser } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({ authed: false });
     };
+
+    if (pendingUser) {
+      return null;
+    }
 
     return (
       <div className="App">
