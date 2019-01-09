@@ -36,22 +36,25 @@ class MyNavbar extends React.Component {
         return (
           <Nav className='ml-auto' navbar>
             <NavItem>
-              <NavLink tag={RRNavLInk} to='/friends'>Friends</NavLink>
+              <NavLink tag={RRNavLInk} to='/home'><i className="fas fa-home"></i></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLInk} to='/articles'>Articles</NavLink>
+              <NavLink tag={RRNavLInk} to='/friends'><i className="fas fa-user-friends"></i></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLInk} to='/events'>Events</NavLink>
+              <NavLink tag={RRNavLInk} to='/articles'><i className="fas fa-newspaper"></i></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLInk} to='/weather'>Weather</NavLink>
+              <NavLink tag={RRNavLInk} to='/events'><i className="far fa-calendar-alt"></i></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLInk} to='/messages'>Messages</NavLink>
+              <NavLink tag={RRNavLInk} to='/weather'><i className="fas fa-sun"></i></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={logoutClickEvent}>Logout</NavLink>
+              <NavLink tag={RRNavLInk} to='/messages'><i className="fas fa-comments"></i></NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={logoutClickEvent}><i className="fas fa-sign-out-alt"></i></NavLink>
             </NavItem>
           </Nav>
         );
