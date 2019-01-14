@@ -15,7 +15,6 @@ class Auth extends React.Component {
     e.preventDefault();
     authRequests.authenticate()
       .then((results) => {
-        console.log(results.user.uid);
         userRequests.getUserByUid(results.user.uid)
           .then((user) => {
             if (!user) {

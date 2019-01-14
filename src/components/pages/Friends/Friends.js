@@ -6,6 +6,9 @@ import './Friends.scss';
 class Friends extends React.Component {
   state = {
     users: [],
+    potentials: [],
+    confirmed: [],
+    pending: [],
     uid: '',
   }
 
@@ -15,13 +18,28 @@ class Friends extends React.Component {
       .then((users) => {
         console.log(users);
       })
-      .catch(error => console.log('stuff broke', error));
+      .catch(error => console.log('error in componentDidMount', error));
   }
 
   render() {
     return (
       <div className='Friends'>
-        <h2>Muh Friends</h2>
+        <div className='friends container'>
+          <h2>Das Friends</h2>
+          <div className='container for-friends'>
+            <div className='row'>
+              <div className='col'>
+                Could Be Friends
+              </div>
+              <div className='col'>
+                Thinking About It
+              </div>
+              <div className='col'>
+                You're Stuck With Me
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
