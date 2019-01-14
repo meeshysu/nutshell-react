@@ -13,11 +13,7 @@ class Friends extends React.Component {
   }
 
   componentDidMount() {
-    smashRequests.usersAndFriends(authRequests.getCurrentUid())
-      .then((results) => {
-
-      })
-      .catch(error => console.log('error in componentDidMount', error));
+    this.determineUsersFriendship();
   }
 
   determineUsersFriendship = () => {
@@ -25,27 +21,50 @@ class Friends extends React.Component {
     smashRequests.usersAndFriends(uid)
       .then((results) => {
         const users = results;
-        this.setState({ users });
+        const confirmedFriendship = users.filter(user => user.isAccepted);
+        const pendingFriendship = users.filter(user => user.isPending && !user.Accepted);
+        const potentialFriendship = users.filter(user => !users.isPending && user.isAccepted);
+        this.setState({
+          users,
+          confirmedFriendship,
+          potentialFriendship,
+          pendingFriendship,
+        });
       })
       .catch(error => console.log('error in smashRequests'));
   }
 
   render() {
     return (
-      <div className='Friends'>
-        <div className='friends container'>
-          <h2>Das Friends</h2>
-          <div className='container'>
-            <div className='row'>
-              <div className='col'>
-                Could Be Friends
-              </div>
-              <div className='col'>
-                Thinking About It
-              </div>
-              <div className='col'>
-                You're Stuck With Me
-              </div>
+      <div className='Friends mx-auto'>
+        <div className="card-deck text-center">
+          <div className="card border-dark" id="potential">
+            <div className="card-body text-center">
+              <h4 className="card-title"><i className=""></i></h4>
+              <h6 className="card-subtitle mb-2 text-muted">Potential</h6>
+              <p className='friendships'>
+              pickles</p>
+            </div>
+          </div>
+        </div>
+        <div className="card-deck text-center">
+          <div className="card border-dark" id="pending">
+            <div className="card-body text-center">
+              <h4 className="card-title"><i className=""></i></h4>
+              <h6 className="card-subtitle mb-2 text-muted">Pending</h6>
+              <p className='friendships'>
+              pickles
+              cheese</p>
+            </div>
+          </div>
+        </div>
+        <div className="card-deck text-center">
+          <div className="card border-dark" id="confirmed">
+            <div className="card-body text-center">
+              <h4 className="card-title"><i className=""></i></h4>
+              <h6 className="card-subtitle mb-2 text-muted">Confirmed</h6>
+              <p className='friendships'>
+              pickles</p>
             </div>
           </div>
         </div>
