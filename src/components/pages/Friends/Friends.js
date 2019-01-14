@@ -13,12 +13,21 @@ class Friends extends React.Component {
   }
 
   componentDidMount() {
-    smashRequests
-      .usersAndFriends(authRequests.getCurrentUid())
-      .then((users) => {
-        console.log(users);
+    smashRequests.usersAndFriends(authRequests.getCurrentUid())
+      .then((results) => {
+
       })
       .catch(error => console.log('error in componentDidMount', error));
+  }
+
+  determineUsersFriendship = () => {
+    const uid = authRequests.getCurrentUid();
+    smashRequests.usersAndFriends(uid)
+      .then((results) => {
+        const users = results;
+        this.setState({ users });
+      })
+      .catch(error => console.log('error in smashRequests'));
   }
 
   render() {
@@ -26,7 +35,7 @@ class Friends extends React.Component {
       <div className='Friends'>
         <div className='friends container'>
           <h2>Das Friends</h2>
-          <div className='container for-friends'>
+          <div className='container'>
             <div className='row'>
               <div className='col'>
                 Could Be Friends
