@@ -4,7 +4,7 @@ import './FriendItem.scss';
 
 class FriendItem extends React.Component {
   static propTypes = {
-    listing: friendShape,
+    friends: friendShape,
   };
 
 
