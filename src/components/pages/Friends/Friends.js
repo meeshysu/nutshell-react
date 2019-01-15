@@ -22,7 +22,7 @@ class Friends extends React.Component {
         const users = results;
         const confirmed = users.filter(user => user.isAccepted);
         const pending = users.filter(user => user.isPending && !user.Accepted);
-        const potentials = users.filter(user => !users.isPending && user.isAccepted);
+        const potentials = users.filter(user => !user.isPending && !user.isAccepted);
         this.setState({
           confirmed,
           potentials,
