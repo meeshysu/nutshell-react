@@ -1,15 +1,14 @@
 import React from 'react';
 import smashRequests from '../../../helpers/data/smashRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import FriendItem from '../FriendItem/FriendItem';
 import './Friends.scss';
 
 class Friends extends React.Component {
   state = {
-    users: [],
     potentials: [],
     confirmed: [],
     pending: [],
-    uid: '',
   }
 
   componentDidMount() {
@@ -21,53 +20,42 @@ class Friends extends React.Component {
     smashRequests.usersAndFriends(uid)
       .then((results) => {
         const users = results;
-        const confirmedFriendship = users.filter(user => user.isAccepted);
-        const pendingFriendship = users.filter(user => user.isPending && !user.Accepted);
-        const potentialFriendship = users.filter(user => !users.isPending && user.isAccepted);
+        const confirmed = users.filter(user => user.isAccepted);
+        const pending = users.filter(user => user.isPending && !user.Accepted);
+        const potentials = users.filter(user => !users.isPending && user.isAccepted);
         this.setState({
-          users,
-          confirmedFriendship,
-          potentialFriendship,
-          pendingFriendship,
+          confirmed,
+          potentials,
+          pending,
         });
       })
       .catch(error => console.log('error in smashRequests'));
   }
 
   render() {
+    const {
+      confirmed,
+      potentials,
+      pending,
+    } = this.state;
+
+    const friendItemComponent = (friendPooArray, status) => (
+      friendPooArray.map(friend => (
+        <FriendItem
+          friend={friend}
+          key={friend.id}
+          status={status}
+        />
+      )));
+
     return (
       <div className='Friends mx-auto'>
-        <div className="card-deck text-center">
-          <div className="card border-dark" id="potential">
-            <div className="card-body text-center">
-              <h4 className="card-title"><i className=""></i></h4>
-              <h6 className="card-subtitle mb-2 text-muted">Potential</h6>
-              <p className='friendships'>
-              pickles</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-deck text-center">
-          <div className="card border-dark" id="pending">
-            <div className="card-body text-center">
-              <h4 className="card-title"><i className=""></i></h4>
-              <h6 className="card-subtitle mb-2 text-muted">Pending</h6>
-              <p className='friendships'>
-              pickles
-              cheese</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-deck text-center">
-          <div className="card border-dark" id="confirmed">
-            <div className="card-body text-center">
-              <h4 className="card-title"><i className=""></i></h4>
-              <h6 className="card-subtitle mb-2 text-muted">Confirmed</h6>
-              <p className='friendships'>
-              pickles</p>
-            </div>
-          </div>
-        </div>
+        <h2 className='row potential'>Potential</h2>
+        {friendItemComponent(potentials, 'potentials')}
+        <h2 className='row pending'>Pending</h2>
+        {friendItemComponent(pending, 'pendings')}
+        <h2 className='row confirmed'>Confirmed</h2>
+        {friendItemComponent(confirmed, 'confirmed')}
       </div>
     );
   }
