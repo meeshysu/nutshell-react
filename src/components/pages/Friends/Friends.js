@@ -1,7 +1,7 @@
 import React from 'react';
 import smashRequests from '../../../helpers/data/smashRequests';
 import authRequests from '../../../helpers/data/authRequests';
-import FriendItem from '../FriendItem/FriendItem';
+import FriendItem from '../../FriendItem/FriendItem';
 import './Friends.scss';
 
 class Friends extends React.Component {
@@ -29,7 +29,7 @@ class Friends extends React.Component {
           pending,
         });
       })
-      .catch(error => console.log('error in smashRequests'));
+      .catch(error => console.error('error in smashRequests'));
   }
 
   render() {
