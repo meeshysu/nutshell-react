@@ -42,6 +42,14 @@ class Friends extends React.Component {
       .catch(err => console.error('error in goodbyeFriend'));
   }
 
+  helloFriend = (friendUid) => {
+    friendRequests.addFriend(friendUid)
+      .then(() => {
+        this.determineUsersFriendship();
+      })
+      .catch(err => console.error('error in helloFriend'));
+  }
+
   render() {
     const {
       confirmed,
@@ -56,6 +64,7 @@ class Friends extends React.Component {
           key={friend.id}
           status={status}
           goodbyeFriend={this.goodbyeFriend}
+          helloFriend={this.helloFriend}
         />
       )));
 
