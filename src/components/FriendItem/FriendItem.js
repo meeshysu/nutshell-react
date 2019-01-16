@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import friendShape from '../../helpers/propz/friendShape';
-// import Friends from '../pages/Friends/Friends';
 import './FriendItem.scss';
 
 class FriendItem extends React.Component {
