@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from 'reactstrap';
+import PropTypes from 'prop-types';
 import friendShape from '../../helpers/propz/friendShape';
 // import Friends from '../pages/Friends/Friends';
 import './FriendItem.scss';
@@ -6,6 +8,8 @@ import './FriendItem.scss';
 class FriendItem extends React.Component {
   static propTypes = {
     friends: friendShape,
+    status: PropTypes.string,
+    goodbyeFriend: PropTypes.func,
   };
 
 
@@ -21,14 +25,14 @@ class FriendItem extends React.Component {
     const makeButtons = () => {
       if (status === 'confirmed') {
         return (
-          <button className='btn btn-danger buhBye' id={friend.id} onClick={this.deleteFriendButton}>X</button>
+          <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriendButton}>X</Button>
         );
-      } if (status === 'pending' && friend.maybeMyFriendId === 'them') {
-        return (
-          <div>
-            <button className='btn btn-danger deleteYoAss' id={friend.maybeMyFriendId} onClick={this.deleteFriendButton}>X</button>
-          </div>
-        );
+      // } if (status === 'pending' && friend.friendRequest === 'them') {
+      //   return (
+      //     <div>
+      //       <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriendButton}>X</Button>
+      //     </div>
+        // );
       }
       return '';
     };

@@ -1,5 +1,6 @@
 import React from 'react';
 import smashRequests from '../../../helpers/data/smashRequests';
+import friendRequests from '../../../helpers/data/friendRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import FriendItem from '../../FriendItem/FriendItem';
 import './Friends.scss';
@@ -33,6 +34,14 @@ class Friends extends React.Component {
       .catch(error => console.error('error in smashRequests'));
   }
 
+  goodbyeFriend = (maybeMyFriendId) => {
+    friendRequests.deleteFriend(maybeMyFriendId)
+      .then(() => {
+        this.determineUsersFriendship();
+      })
+      .catch(err => console.error('error in goodbyeFriend'));
+  }
+
   render() {
     const {
       confirmed,
@@ -46,19 +55,26 @@ class Friends extends React.Component {
           friend={friend}
           key={friend.id}
           status={status}
+          goodbyeFriend={this.goodbyeFriend}
         />
       )));
 
     return (
       <div className='Friends'>
-        <div className='container'>
-          <div className='row'>
-            <h2 className='col-sm potential'>Potential</h2>
-            {friendItemComponent(potentials, 'potentials')}
-            <h2 className='col-sm pending'>Pending</h2>
-            {friendItemComponent(pending, 'pendings')}
-            <h2 className='col-sm confirmed'>Confirmed</h2>
-            {friendItemComponent(confirmed, 'confirmed')}
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <h3>Potential Friends</h3>
+              {friendItemComponent(potentials, 'potentials')}
+            </div>
+            <div className="col-sm">
+              <h3>Pending Requests</h3>
+              {friendItemComponent(pending, 'pendings')}
+            </div>
+            <div className="col-sm">
+              <h3>Friends</h3>
+              {friendItemComponent(confirmed, 'confirmed')}
+            </div>
           </div>
         </div>
       </div>
