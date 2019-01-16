@@ -15,6 +15,7 @@ class Friends extends React.Component {
     this.determineUsersFriendship();
   }
 
+
   determineUsersFriendship = () => {
     const uid = authRequests.getCurrentUid();
     smashRequests.usersAndFriends(uid)
@@ -49,13 +50,17 @@ class Friends extends React.Component {
       )));
 
     return (
-      <div className='Friends mx-auto'>
-        <h2 className='row potential'>Potential</h2>
-        {friendItemComponent(potentials, 'potentials')}
-        <h2 className='row pending'>Pending</h2>
-        {friendItemComponent(pending, 'pendings')}
-        <h2 className='row confirmed'>Confirmed</h2>
-        {friendItemComponent(confirmed, 'confirmed')}
+      <div className='Friends'>
+        <div className='container'>
+          <div className='row'>
+            <h2 className='col-sm potential'>Potential</h2>
+            {friendItemComponent(potentials, 'potentials')}
+            <h2 className='col-sm pending'>Pending</h2>
+            {friendItemComponent(pending, 'pendings')}
+            <h2 className='col-sm confirmed'>Confirmed</h2>
+            {friendItemComponent(confirmed, 'confirmed')}
+          </div>
+        </div>
       </div>
     );
   }
