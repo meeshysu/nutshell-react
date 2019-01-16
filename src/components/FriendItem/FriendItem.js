@@ -17,14 +17,14 @@ class FriendItem extends React.Component {
     e.preventDefault();
     const uid = authRequests.getCurrentUid();
     const friendUid = e.target.id;
-    const { addFriend } = this.props;
+    const { helloFriend } = this.props;
     const newFriend = {
       uid,
       friendUid,
-      isAccepted: true,
-      isPending: false,
+      isAccepted: false,
+      isPending: true,
     };
-    addFriend(newFriend);
+    helloFriend(newFriend);
   };
 
   deleteFriend = (e) => {
@@ -49,7 +49,7 @@ class FriendItem extends React.Component {
         //   );
       } if (status === 'potentials') {
         return (
-          <Button className='btn btn-success' id={friend.uid} onClick={this.makeNewFriend}>+</Button>
+          <Button className='btn btn-info' id={friend.uid} onClick={this.makeNewFriend}>+</Button>
         );
       }
       return '';
