@@ -1,20 +1,47 @@
 import React from 'react';
+import { Button } from 'reactstrap';
+import PropTypes from 'prop-types';
 import friendShape from '../../helpers/propz/friendShape';
 import './FriendItem.scss';
 
 class FriendItem extends React.Component {
   static propTypes = {
     friends: friendShape,
+    status: PropTypes.string,
+    goodbyeFriend: PropTypes.func,
   };
 
 
+  deleteFriendButton = (e) => {
+    e.preventDefault();
+    const maybeMyFriendId = e.target.id;
+    const { goodbyeFriend } = this.props;
+    goodbyeFriend(maybeMyFriendId);
+  }
+
   render() {
-    const { friend } = this.props;
+    const { friend, status } = this.props;
+    const makeButtons = () => {
+      if (status === 'confirmed') {
+        return (
+          <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriendButton}>X</Button>
+        );
+      // } if (status === 'pending' && friend.friendRequest === 'them') {
+      //   return (
+      //     <div>
+      //       <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriendButton}>X</Button>
+      //     </div>
+        // );
+      }
+      return '';
+    };
+
     return (
-      <li className='friend-item text-center' id={friend.id}>
-        <span className='col-2'><img src={friend.photo} alt={friend}/></span>
+      <div className='friend-item text-center' id={friend.id}>
+        <span className='col-1'><img className='user-photo' src={friend.photo} alt={friend} /></span>
         <span className='col-4'>{friend.userName}</span>
-      </li>
+        <div className='deleteButton'>{makeButtons()}</div>
+      </div>
     );
   }
 }
