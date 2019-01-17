@@ -39,7 +39,7 @@ class Friends extends React.Component {
       .then(() => {
         this.determineUsersFriendship();
       })
-      .catch(err => console.error('error in goodbyeFriend'));
+      .catch(err => console.error('error in goodbyeFriend', err));
   }
 
   helloFriend = (friendUid) => {
@@ -47,7 +47,15 @@ class Friends extends React.Component {
       .then(() => {
         this.determineUsersFriendship();
       })
-      .catch(err => console.error('error in helloFriend'));
+      .catch(err => console.error('error in helloFriend', err));
+  }
+
+  confirmFriend = (friendId) => {
+    friendRequests.acceptFriendship(friendId)
+      .then(() => {
+        this.determineUsersFriendship();
+      })
+      .catch(err => console.error('error in confirmFriend', err));
   }
 
   render() {
@@ -65,6 +73,7 @@ class Friends extends React.Component {
           status={status}
           goodbyeFriend={this.goodbyeFriend}
           helloFriend={this.helloFriend}
+          confirmFriend={this.confirmFriend}
         />
       )));
 
@@ -78,7 +87,7 @@ class Friends extends React.Component {
             </div>
             <div className="col-sm">
               <h3>Pending Requests</h3>
-              {friendItemComponent(pending, 'pendings')}
+              {friendItemComponent(pending, 'pending')}
             </div>
             <div className="col-sm">
               <h3>Friends</h3>
