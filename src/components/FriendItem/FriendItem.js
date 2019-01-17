@@ -11,6 +11,7 @@ class FriendItem extends React.Component {
     status: PropTypes.string,
     goodbyeFriend: PropTypes.func,
     helloFriend: PropTypes.func,
+    confirmFriend: PropTypes.func,
   };
 
   makeNewFriend = (e) => {
