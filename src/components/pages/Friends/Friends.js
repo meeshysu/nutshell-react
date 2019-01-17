@@ -87,7 +87,7 @@ class Friends extends React.Component {
             </div>
             <div className="col-sm">
               <h3>Pending Requests</h3>
-              {friendItemComponent(pending, 'pendings')}
+              {friendItemComponent(pending, 'pending')}
             </div>
             <div className="col-sm">
               <h3>Friends</h3>

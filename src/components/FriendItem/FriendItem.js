@@ -33,7 +33,14 @@ class FriendItem extends React.Component {
     const maybeMyFriendId = e.target.id;
     const { goodbyeFriend } = this.props;
     goodbyeFriend(maybeMyFriendId);
-  }
+  };
+
+  confirmationEvent = (e) => {
+    e.preventDefault();
+    const friendId = e.target.id;
+    const { confirmFriend } = this.props;
+    confirmFriend(friendId);
+  };
 
   render() {
     const { friend, status } = this.props;
@@ -42,12 +49,13 @@ class FriendItem extends React.Component {
         return (
           <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriend}>X</Button>
         );
-        // } if (status === 'pending' && friend.friendRequest === 'them') {
-        //   return (
-        //     <div>
-        //       <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriendButton}>X</Button>
-        //     </div>
-        //   );
+      } if (status === 'pending' && friend.friendRequest === 'them') {
+        return (
+          <div>
+            <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriend}>X</Button>
+            <Button className='btn btn-info' id={friend.friendRequestId} onClick={this.makeNewFriend}>+</Button>
+          </div>
+        );
       } if (status === 'potentials') {
         return (
           <Button className='btn btn-info' id={friend.uid} onClick={this.makeNewFriend}>+</Button>
