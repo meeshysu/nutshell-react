@@ -53,7 +53,7 @@ class FriendItem extends React.Component {
         return (
           <div>
             <Button className='btn btn-danger' id={friend.friendRequestId} onClick={this.deleteFriend}>X</Button>
-            <Button className='btn btn-info' id={friend.friendRequestId} onClick={this.makeNewFriend}>+</Button>
+            <Button className='btn btn-info' id={friend.friendRequestId} onClick={this.confirmationEvent}>+</Button>
           </div>
         );
       } if (status === 'potentials') {
@@ -61,7 +61,7 @@ class FriendItem extends React.Component {
           <Button className='btn btn-info' id={friend.uid} onClick={this.makeNewFriend}>+</Button>
         );
       }
-      return '';
+      return <p>Pending</p>;
     };
 
     return (
